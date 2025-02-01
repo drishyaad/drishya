@@ -3,31 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman Game </title>
-    <link rel="stylesheet" href="https://github.com/drishyaad/drishya/blob/main/style.css">
-    <script src="https://github.com/drishyaad/drishya/blob/main/word-list.js" defer></script>
-    <script src="https://github.com/drishyaad/drishya/blob/main/script.js" defer></script>
+    <title>Flappy Bird Clone</title>
+    <style>
+        body { text-align: center; background-color: #70c5ce; }
+        canvas { background-color: #fff; display: block; margin: auto; }
+    </style>
 </head>
 <body>
-    <div class="game-modal">
-        <div class="content">
-            <img src="#" alt="gif">
-            <h4>Game Over!</h4>
-            <p>The correct word was: <b>rainbow</b></p>
-            <button class="play-again">Play Again</button>
-        </div>
-    </div>
-    <div class="container">
-        <div class="hangman-box">
-            <img src="#" draggable="false" alt="hangman-img">
-            <h1>Hangman Game</h1>
-        </div>
-        <div class="game-box">
-            <ul class="word-display"></ul>
-            <h4 class="hint-text">Hint: <b></b></h4>
-            <h4 class="guesses-text">Incorrect guesses: <b></b></h4>
-            <div class="keyboard"></div>
-        </div>
-    </div>
+    <h1>Flappy Bird Clone</h1>
+    <canvas id="gameCanvas" width="320" height="480"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const bird = { x: 50, y: 150, width: 20, height: 20, gravity: 0.6, lift: -10, velocity: 0 };
+        const pipes = [];
+        let score = 0;
+        let gameOver = false;
+
+        function drawBird() {
+            ctx.fillStyle = "yellow";
+            ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+        }
+
+        function drawPipes() {
+            ctx.fillStyle = "green";
+            pipes.forEach(pipe => {
+                ctx.fillRect(pipe.x, 0, pipe.width, pipe.top);
+                ctx.fillRect(pipe.x, pipe.bottom, pipe.width, canvas.height - pipe.bottom);
+            });
+        }
+
+        function updateGame() {
+            if (gameOver) return;
+            bird.velocity += bird.gravity;
+            bird.y += bird.velocity;
+
+            if (bird.y + bird.height >= canvas.height || bird.y <= 0) {
+                gameOver = true;
+            }
+
+            pipes.forEach(pipe => {
+                pipe.x -= 2;
+                if (pipe.x + pipe.width < 0) {
+                    pipes.shift();
+                    score++;
+                }
+                if (bird.x < pipe.x + pipe.width && bird.x + bird.width > pipe.x &&
+                    (bird.y < pipe.top || bird.y + bird.height > pipe.bottom)) {
+                    gameOver = true;
+                }
+            });
+
+            if (frames % 90 === 0) {
+                let pipeHeight = Math.floor(Math.random() * (canvas.height / 2)) + 50;
+                pipes.push({ x: canvas.width, top: pipeHeight, bottom: pipeHeight + 100, width: 30 });
+            }
+            frames++;
+        }
+
+        function drawScore() {
+            ctx.fillStyle = "black";
+            ctx.font = "20px Arial";
+            ctx.fillText("Score: " + score, 10, 20);
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBird();
+            drawPipes();
+            drawScore();
+            updateGame();
+            if (!gameOver) requestAnimationFrame(gameLoop);
+            else alert("Game Over! Score: " + score);
+        }
+
+        document.addEventListener("keydown", () => { if (!gameOver) bird.velocity = bird.lift; });
+        let frames = 0;
+        gameLoop();
+    </script>
 </body>
 </html>

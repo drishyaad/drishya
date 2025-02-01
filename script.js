@@ -12,7 +12,16 @@ const resetGame = () => {
    
     correctLetters = [];
     wrongGuessCount = 0;
-    hangmanImage.src = "C:\Users\Dell\Desktop\hangman\images";
+    hangmanImage.src =
+       "https://github.com/drishyaad/drishya/blob/main/hangman-0.svg",
+       "https://github.com/drishyaad/drishya/blob/main/hangman-1.svg",
+       "https://github.com/drishyaad/drishya/blob/main/hangman-2.svg",
+       "https://github.com/drishyaad/drishya/blob/main/hangman-3.svg",
+       "https://github.com/drishyaad/drishya/blob/main/hangman-4.svg",
+       "https://github.com/drishyaad/drishya/blob/main/hangman-5.svg",
+       "https://github.com/drishyaad/drishya/blob/main/hangman-6.svg",
+       "https://github.com/drishyaad/drishya/blob/main/lost.gif",
+       "https://github.com/drishyaad/drishya/blob/main/victory.gif";
     guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
     wordDisplay.innerHTML = currentWord.split("").map(() => `<li class="letter"></li>`).join("");
     keyboardDiv.querySelectorAll("button").forEach(btn => btn.disabled = false);

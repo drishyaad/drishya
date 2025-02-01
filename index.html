@@ -3,16 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Paddle Game</title>
+    <title>Paddle Game</title>
     <style>
-        body { text-align: center; background-color: #70c5ce; }
+        body { text-align: center; background-color: #70c5ce; font-family: Arial, sans-serif; }
         canvas { background-color: #fff; display: block; margin: auto; }
+        .title-screen, .game-over-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .hidden { display: none; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
-    <h1>Paddle Game</h1>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="titleScreen" class="title-screen">
+        <h1>Welcome to Our Project</h1>
+        <h2>Paddle Game</h2>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+    <div id="gameContainer" class="hidden">
+        <h1>Paddle Game</h1>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+    </div>
+    <div id="gameOverScreen" class="game-over-screen hidden">
+        <h1>Game Over</h1>
+        <button onclick="restartGame()">Play Again</button>
+    </div>
     <script>
+        function startGame() {
+            document.getElementById("titleScreen").classList.add("hidden");
+            document.getElementById("gameOverScreen").classList.add("hidden");
+            document.getElementById("gameContainer").classList.remove("hidden");
+            gameLoop();
+        }
+
+        function restartGame() {
+            document.location.reload();
+        }
+
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
 
@@ -42,8 +67,8 @@
                 ball.dy *= -1;
             }
             if (ball.y + ball.radius > canvas.height) {
-                alert("Game Over");
-                document.location.reload();
+                document.getElementById("gameContainer").classList.add("hidden");
+                document.getElementById("gameOverScreen").classList.remove("hidden");
             }
             if (ball.y + ball.radius > paddle.y && ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
                 ball.dy *= -1;
@@ -68,7 +93,6 @@
         }
 
         document.addEventListener("keydown", movePaddle);
-        gameLoop();
     </script>
 </body>
 </html>

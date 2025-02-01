@@ -3,83 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flappy Bird Clone</title>
+    <title>Simple Paddle Game</title>
     <style>
         body { text-align: center; background-color: #70c5ce; }
         canvas { background-color: #fff; display: block; margin: auto; }
     </style>
 </head>
 <body>
-    <h1>Flappy Bird Clone</h1>
-    <canvas id="gameCanvas" width="320" height="480"></canvas>
+    <h1>Paddle Game</h1>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
     <script>
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
 
-        const bird = { x: 50, y: 150, width: 20, height: 20, gravity: 0.6, lift: -10, velocity: 0 };
-        const pipes = [];
-        let score = 0;
-        let gameOver = false;
+        let paddle = { x: 175, y: 380, width: 50, height: 10, dx: 5 };
+        let ball = { x: 200, y: 200, radius: 10, dx: 2, dy: -2 };
 
-        function drawBird() {
-            ctx.fillStyle = "yellow";
-            ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+        function drawPaddle() {
+            ctx.fillStyle = "blue";
+            ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
         }
 
-        function drawPipes() {
-            ctx.fillStyle = "green";
-            pipes.forEach(pipe => {
-                ctx.fillRect(pipe.x, 0, pipe.width, pipe.top);
-                ctx.fillRect(pipe.x, pipe.bottom, pipe.width, canvas.height - pipe.bottom);
-            });
+        function drawBall() {
+            ctx.fillStyle = "red";
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fill();
         }
 
         function updateGame() {
-            if (gameOver) return;
-            bird.velocity += bird.gravity;
-            bird.y += bird.velocity;
+            ball.x += ball.dx;
+            ball.y += ball.dy;
 
-            if (bird.y + bird.height >= canvas.height || bird.y <= 0) {
-                gameOver = true;
+            if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+                ball.dx *= -1;
             }
-
-            pipes.forEach(pipe => {
-                pipe.x -= 2;
-                if (pipe.x + pipe.width < 0) {
-                    pipes.shift();
-                    score++;
-                }
-                if (bird.x < pipe.x + pipe.width && bird.x + bird.width > pipe.x &&
-                    (bird.y < pipe.top || bird.y + bird.height > pipe.bottom)) {
-                    gameOver = true;
-                }
-            });
-
-            if (frames % 90 === 0) {
-                let pipeHeight = Math.floor(Math.random() * (canvas.height / 2)) + 50;
-                pipes.push({ x: canvas.width, top: pipeHeight, bottom: pipeHeight + 100, width: 30 });
+            if (ball.y - ball.radius < 0) {
+                ball.dy *= -1;
             }
-            frames++;
+            if (ball.y + ball.radius > canvas.height) {
+                alert("Game Over");
+                document.location.reload();
+            }
+            if (ball.y + ball.radius > paddle.y && ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
+                ball.dy *= -1;
+            }
         }
 
-        function drawScore() {
-            ctx.fillStyle = "black";
-            ctx.font = "20px Arial";
-            ctx.fillText("Score: " + score, 10, 20);
+        function movePaddle(event) {
+            if (event.key === "ArrowLeft" && paddle.x > 0) {
+                paddle.x -= paddle.dx;
+            }
+            if (event.key === "ArrowRight" && paddle.x + paddle.width < canvas.width) {
+                paddle.x += paddle.dx;
+            }
         }
 
         function gameLoop() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBird();
-            drawPipes();
-            drawScore();
+            drawPaddle();
+            drawBall();
             updateGame();
-            if (!gameOver) requestAnimationFrame(gameLoop);
-            else alert("Game Over! Score: " + score);
+            requestAnimationFrame(gameLoop);
         }
 
-        document.addEventListener("keydown", () => { if (!gameOver) bird.velocity = bird.lift; });
-        let frames = 0;
+        document.addEventListener("keydown", movePaddle);
         gameLoop();
     </script>
 </body>

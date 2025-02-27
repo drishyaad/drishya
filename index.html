@@ -1,98 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paddle Game</title>
+    <title>Your Name - Personal Website</title>
     <style>
-        body { text-align: center; background-color: #70c5ce; font-family: Arial, sans-serif; }
-        canvas { background-color: #fff; display: block; margin: auto; }
-        .title-screen, .game-over-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .hidden { display: none; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        section {
+            margin-bottom: 30px;
+        }
+        .profile-img {
+            border-radius: 50%;
+            max-width: 200px;
+            display: block;
+            margin: 0 auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #7f8c8d;
+        }
+        a {
+            color: #3498db;
+        }
     </style>
 </head>
 <body>
-    <div id="titleScreen" class="title-screen">
-        <h1>Welcome to Our Project</h1>
-        <h2>Paddle Game</h2>
-        <button onclick="startGame()">Start Game</button>
-    </div>
-    <div id="gameContainer" class="hidden">
-        <h1>Paddle Game</h1>
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
-    </div>
-    <div id="gameOverScreen" class="game-over-screen hidden">
-        <h1>Game Over</h1>
-        <button onclick="restartGame()">Play Again</button>
-    </div>
-    <script>
-        function startGame() {
-            document.getElementById("titleScreen").classList.add("hidden");
-            document.getElementById("gameOverScreen").classList.add("hidden");
-            document.getElementById("gameContainer").classList.remove("hidden");
-            gameLoop();
-        }
-
-        function restartGame() {
-            document.location.reload();
-        }
-
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-
-        let paddle = { x: 175, y: 380, width: 50, height: 10, dx: 5 };
-        let ball = { x: 200, y: 200, radius: 10, dx: 2, dy: -2 };
-
-        function drawPaddle() {
-            ctx.fillStyle = "blue";
-            ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
-        }
-
-        function drawBall() {
-            ctx.fillStyle = "red";
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fill();
-        }
-
-        function updateGame() {
-            ball.x += ball.dx;
-            ball.y += ball.dy;
-
-            if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
-                ball.dx *= -1;
-            }
-            if (ball.y - ball.radius < 0) {
-                ball.dy *= -1;
-            }
-            if (ball.y + ball.radius > canvas.height) {
-                document.getElementById("gameContainer").classList.add("hidden");
-                document.getElementById("gameOverScreen").classList.remove("hidden");
-            }
-            if (ball.y + ball.radius > paddle.y && ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
-                ball.dy *= -1;
-            }
-        }
-
-        function movePaddle(event) {
-            if (event.key === "ArrowLeft" && paddle.x > 0) {
-                paddle.x -= paddle.dx;
-            }
-            if (event.key === "ArrowRight" && paddle.x + paddle.width < canvas.width) {
-                paddle.x += paddle.dx;
-            }
-        }
-
-        function gameLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawPaddle();
-            drawBall();
-            updateGame();
-            requestAnimationFrame(gameLoop);
-        }
-
-        document.addEventListener("keydown", movePaddle);
-    </script>
+    <header>
+        <img src="profile-picture.jpg" alt="Your Name" class="profile-img">
+        <h1>Your Name</h1>
+        <p>Web Developer | Designer | Photographer</p>
+    </header>
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hello! I'm a passionate web developer with expertise in HTML, CSS, and JavaScript. I enjoy creating responsive and user-friendly websites.</p>
+    </section>
+    
+    <section id="projects">
+        <h2>Projects</h2>
+        <ul>
+            <li><a href="#">Project 1</a> - Description of your awesome project</li>
+            <li><a href="#">Project 2</a> - Description of another amazing project</li>
+            <li><a href="#">Project 3</a> - Yet another impressive project</li>
+        </ul>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+        <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile">linkedin.com/in/yourprofile</a></p>
+        <p>GitHub: <a href="https://github.com/yourusername">github.com/yourusername</a></p>
+    </section>
+    
+    <footer>
+        <p>© 2025 Your Name. All rights reserved.</p>
+    </footer>
 </body>
 </html>

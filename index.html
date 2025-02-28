@@ -3,37 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drishya Adhikari - Personal Website</title>
+    <title>Drishya Adhikari - Professional Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        : root {
-            --primary-color: #3a86ff;
-            --secondary-color: #8338ec;
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-            --dark-accent: #2b2d42;
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #4f46e5;
+            --accent-color: #f59e0b;
+            --text-color: #1f2937;
+            --light-bg: #f8fafc;
+            --dark-accent: #1e293b;
+            --card-bg: #ffffff;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
             color: var(--text-color);
-            background-color: white;
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
         header {
             text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--light-bg);
-            padding-bottom: 20px;
+            padding: 40px 0;
+            background-color: var(--card-bg);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .profile-img {
+            border-radius: 50%;
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--dark-accent);
+            margin-bottom: 20px;
         }
         
         nav {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
             display: flex;
             justify-content: center;
             margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
         }
         
         nav a {
@@ -41,9 +91,9 @@
             text-decoration: none;
             color: var(--dark-accent);
             font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
         }
         
         nav a:hover {
@@ -56,297 +106,383 @@
             color: white;
         }
         
-        h1 {
-            color: var(--primary-color);
+        section {
+            margin-bottom: 40px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
         h2 {
             color: var(--secondary-color);
-            border-bottom: 1px solid var(--light-bg);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
             padding-bottom: 10px;
         }
         
-        section {
-            margin-bottom: 30px;
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 60px;
+            background-color: var(--accent-color);
         }
         
-        .profile-img {
-            border-radius: 50%;
-            max-width: 200px;
-            display: block;
-            margin: 0 auto 20px;
-            border: 3px solid var(--primary-color);
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
         
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 2px solid var(--light-bg);
-            color: #7f8c8d;
-        }
-        
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        .projects-grid, .photo-grid {
+        .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .photo-card {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            background-color: var(--card-bg);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        
+        .photo-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .photo-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .photo-info p {
+            color: var(--text-color);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .photo-info p:first-of-type {
+            font-weight: 600;
+            color: var(--dark-accent);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
             gap: 20px;
             margin-top: 20px;
         }
         
-        .project-card, .photo-card {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+        .social-links a {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            transition: var(--transition);
         }
         
-        .project-card:hover, .photo-card:hover {
-            transform: translateY(-5px);
+        .social-links a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px);
         }
         
-        .project-card img, .photo-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
         
-        .card-content {
-            padding: 15px;
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
         }
         
-        .photo-info {
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.9);
+        .contact-item i {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 10px;
+            width: 24px;
+            text-align: center;
         }
         
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 4px;
-            margin-top: 10px;
-            transition: background-color 0.3s;
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            margin-top: 50px;
+            color: var(--dark-accent);
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
         }
         
-        .btn:hover {
-            background-color: var(--secondary-color);
-            text-decoration: none;
+        .footer-text {
+            margin-bottom: 20px;
         }
         
         @media (max-width: 768px) {
-            .projects-grid, .photo-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 0 15px;
             }
             
             nav {
                 flex-direction: column;
                 align-items: center;
+                padding: 10px;
+                position: relative;
+                top: 0;
             }
             
             nav a {
                 margin: 5px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Home Page Content -->
-    <div id="home-content">
-        <header>
-            <img src="IMG_3985.JPG"  class="profile-img">
-            <h1>Drishya Adhikari</h1>
-            <p> IT student | Student Leader | Politics | Traveller </p>
-        </header>
-        
-        <nav>
-            <a href="#home-content" class="active" onclick="showPage('home-content'); return false;">Home</a>
-            <a href="#photos-content" onclick="showPage('photos-content'); return false;">Photography</a>
-            <a href="#contact-content" onclick="showPage('contact-content'); return false;">Contact</a>
-        </nav>
-        
-        <section id="about">
-            <h2>About Me</h2>
-           <p> I am Drishya Adhikari, a diligent IT student at Gandaki University and the president of the All Nepal National Independent Students' Union (Revolutionary) [ANNISU(R)] Gandaki University National Committee. I have a strong passion for leadership, lobbying, and empowering students and actively work to create a progressive and inclusive academic environment. I strive to become a voice for students, advocating constructive changes, and contributing to education and social development through effective measures.</p>
-
-<p> Through my work, I aim to promote collaboration, champion the rights of students, and become involved in activities that lead to positive change. I believe that activism and education complement each other as they develop a better future for students and society. Come along with me as we build a more empowered and vibrant academic community together.</p> 
-        </section>
-    </div>
-    
-    <!-- Photos Page Content -->
-    <div id="photos-content" style="display: none;">
-        <header>
-            <h1>Photography Portfolio</h1>
-            <p>some of the imporant pictures  </p>
-        </header>
-        
-        <nav>
-            <a href="#home-content" onclick="showPage('home-content'); return false;">Home</a>
-            <a href="#photos-content" class="active" onclick="showPage('photos-content'); return false;">Photography</a>
-            <a href="#contact-content" onclick="showPage('contact-content'); return false;">Contact</a>
-        </nav>
-        
-        <section>
-            <h2>Mountain views </h2>
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <img src="IMG_4084.JPG" alt=" Mountain Photo 1">
-                    <div class="photo-info">
-                        <h3>Night View</h3>
-                        <p>Location: Annuparna Base Camp </p>
-                        <p> A night view of the Annuparna mountain  </p>
-                    </div>
+    <div class="container">
+        <!-- Home Page Content -->
+        <div id="home-content">
+            <header>
+                <img src="IMG_3985.JPG" alt="Drishya Adhikari" class="profile-img">
+                <h1>Drishya Adhikari</h1>
+                <p class="tagline">IT Student | Student Leader | Political Activist | Travel Enthusiast</p>
+                <div class="social-links">
+                    <a href="mailto:drishyavhai1@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/drishya-adhikari-5a172b165/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.facebook.com/drishya.adhikar" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/drishya_adhikari_/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
-                <div class="photo-card">
-                    <img src="XBXU9860.JPG" alt=" Mountain Photo 2">
-                    <div class="photo-info">
-                          <h3>Cloudy Mardi View</h3>
-                        <p>Location: Mardi Base Camp</p>
-                        <p>Cloudy Mardi mountain view due to  cloudy environment </p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="IMG_1110.JPG" alt="Mountain Photo 3">
-                    <div class="photo-info">
-                        <h3>Annuparna view</h3>
-                        <p>Location: Annuparna Base Camp </p>
-                        <p> A view of the Annuparna mountain </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section>
-            <h2>Gandaki University program </h2>
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <img src="IMG_3746.JPG" alt="Coastal Photo 1">
-                    <div class="photo-info">
-                        <h3>Gandaki UNiversity </h3>
-                        <p> Hult prize at Gandaki University  </p>
-                        <p> Hult prize at Gandaki University, with the winning team </p>
-                    </div>
-                </div>
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <img src="IMG_3749.JPG" alt="Coastal Photo 1">
-                    <div class="photo-info">
-                        <h3>Gandaki UNiversity </h3>
-                        <p> Hult prize at Gandaki University  </p>
-                        <p> Hult prize at Gandaki University, with the winning team and first runner up team. </p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="IMG_3440.JPG" alt="Coastal Photo 2">
-                    <div class="photo-info">
-                         <h3>Gandaki UNiversity </h3>
-                        <p>Hult prize at Gandaki University  </p>
-                        <p> A small speech for the betterment and support of the Hult prize at Gandaki University, in the excitement of a formal campus director of the Hult prize at Gandaki University.</p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="IMG_3727.JPG" alt="Coastal Photo 3">
-                    <div class="photo-info">
-                       <h3> Gandaki UNiversity </h3>
-                        <p>Hult prize at Gandaki University  </p>
-                        <p>  Receiving token of love from the judge of Hult prize at Gandaki University, with the appreciation of the successful of the Hult journey in the University </p>
-                
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section>
-            <h2>Student Politics </h2>
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <img src="IMG_7373.JPG" alt="Forest Photo 1">
-                    <div class="photo-info">
-                        <h3>With political leaders</h3>
-                        <p>Location: Pokhara</p>
-                        <p>With the leader of Maoist Center in Pokhara, after the program and discussion about the politics of Kaski, Pokhara and students' life  in the university </p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="IMG_1413.JPG" alt="Forest Photo 2">
-                    <div class="photo-info">
-                        <h3>With political leaders</h3>
-                        <p>Location: Pokhara</p>
-                        <p>With the leader of Maoist Center in Pokhara, after the program and discussion about the politics of Kaski, Pokhara and students' life  in the university </p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="IMG_1747.JPEG" alt="Forest Photo 3">
-                    <div class="photo-info">
-                        <h3>With political leaders</h3>
-                        <p>Location: Pokhara</p>
-                        <p>With the leader of Maoist Center in Pokhara, after the program and discussion about the politics of Kaski, Pokhara and students' life  in the university </p>
-                    </div>
-                </div>
-                 <div class="photo-card">
-                    <img src="IMG_4107.JPG" alt="Forest Photo 3">
-                    <div class="photo-info">
-                        <h3>With political leaders</h3>
-                        <p>Location: Pokhara</p>
-                        <p>With the leader of Maoist Center in Pokhara, after the program and discussion about the politics of Kaski, Pokhara and students' life  in the university </p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="IMG_1101.JPEG" alt="Forest Photo 3">
-                    <div class="photo-info">
-                        <h3>In the blood donation program </h3>
-                        <p>Location: Pokhara</p>
-                        <p>With the leader of Maoist Center in Pokhara, the blood donation program was complet which was organized by YCL Nepal Kaski <p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="CXPM4768.JPG" alt="Forest Photo 3">
-                    <div class="photo-info">
-                        <h3>With student  leaders</h3>
-                        <p>Location: Pokhara</p>
-                        <p>With the student  leader of Maoist Center[ANNISU(R) in Pokhara, after the program and discussion about the politics of Kaski, Pokhara and students'  </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    
-    <!-- Contact Page Content -->
- <nav>
-            <a href="#home-content" onclick="showPage('home-content'); return false;">Home</a>
-            <a href="#photos-content" onclick="showPage('photos-content'); return false;">Photography</a>
-            <a href="#contact-content" class="active" onclick="showPage('contact-content'); return false;">Contact</a>
-        </nav>
-    <div id="contact-content" style="display: none;">
-        <header>
-            <h1>Get In Touch</h1>
-            <p> <h3>Following are the contact details. You can contact me </h3> </p>
+            </header>
             
-        </header>
+            <nav>
+                <a href="#home-content" class="active" onclick="showPage('home-content'); return false;">Home</a>
+                <a href="#photos-content" onclick="showPage('photos-content'); return false;">Portfolio</a>
+                <a href="#contact-content" onclick="showPage('contact-content'); return false;">Contact</a>
+            </nav>
+            
+            <section id="about">
+                <h2>About Me</h2>
+                <p>I am Drishya Adhikari, a dedicated IT student at Gandaki University and the president of the All Nepal National Independent Students' Union (Revolutionary) [ANNISU(R)] Gandaki University National Committee. My passion lies in leadership, advocacy, and student empowerment, as I work diligently to foster a progressive and inclusive academic environment.</p>
+                
+                <p>As a student leader, I aim to be a voice for my peers, advocating for constructive changes and contributing to education and social development through effective measures. My approach combines collaboration and championing student rights through activities that catalyze positive change.</p>
+                
+                <p>I firmly believe that activism and education are complementary forces that can create a better future for students and society at large. I invite you to join me as we build a more empowered and vibrant academic community together.</p>
+            </section>
+        </div>
         
-       
+        <!-- Portfolio Page Content -->
+        <div id="photos-content" style="display: none;">
+            <header>
+                <h1>Portfolio Gallery</h1>
+                <p class="tagline">Highlights from my journey in leadership, education, and adventure</p>
+            </header>
+            
+            <nav>
+                <a href="#home-content" onclick="showPage('home-content'); return false;">Home</a>
+                <a href="#photos-content" class="active" onclick="showPage('photos-content'); return false;">Portfolio</a>
+                <a href="#contact-content" onclick="showPage('contact-content'); return false;">Contact</a>
+            </nav>
+            
+            <section id="mountain-views">
+                <h2>Mountain Expeditions</h2>
+                <div class="photo-grid">
+                    <div class="photo-card">
+                        <img src="IMG_4084.JPG" alt="Night View of Annapurna Mountain">
+                        <div class="photo-info">
+                            <h3>Night View</h3>
+                            <p>Location: Annapurna Base Camp</p>
+                            <p>A breathtaking night view of the Annapurna mountain range illuminated under the stars.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="XBXU9860.JPG" alt="Cloudy Mardi View">
+                        <div class="photo-info">
+                            <h3>Cloudy Mardi View</h3>
+                            <p>Location: Mardi Base Camp</p>
+                            <p>The mystical beauty of Mardi mountain partially shrouded in clouds, creating a dramatic atmospheric scene.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="IMG_1110.JPG" alt="Annapurna View">
+                        <div class="photo-info">
+                            <h3>Annapurna Panorama</h3>
+                            <p>Location: Annapurna Base Camp</p>
+                            <p>A majestic panoramic view of the Annapurna mountain range showcasing its towering peaks.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="university-programs">
+                <h2>Gandaki University Leadership</h2>
+                <div class="photo-grid">
+                    <div class="photo-card">
+                        <img src="IMG_3746.JPG" alt="Hult Prize at Gandaki University">
+                        <div class="photo-info">
+                            <h3>Hult Prize Competition</h3>
+                            <p>Gandaki University</p>
+                            <p>Celebrating with the winning team of the Hult Prize competition at Gandaki University, a prestigious entrepreneurship event.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="IMG_3749.JPG" alt="Hult Prize Winners">
+                        <div class="photo-info">
+                            <h3>Hult Prize Finalists</h3>
+                            <p>Gandaki University</p>
+                            <p>A memorable moment with both the winning team and first runner-up team of the Hult Prize competition.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="IMG_3440.JPG" alt="Speech at Hult Prize">
+                        <div class="photo-info">
+                            <h3>Addressing the Audience</h3>
+                            <p>Hult Prize at Gandaki University</p>
+                            <p>Delivering a speech in support of the Hult Prize initiative as the formal campus director of the program at Gandaki University.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="IMG_3727.JPG" alt="Token of Appreciation">
+                        <div class="photo-info">
+                            <h3>Recognition of Leadership</h3>
+                            <p>Hult Prize at Gandaki University</p>
+                            <p>Receiving a token of appreciation from the judge of the Hult Prize competition, acknowledging the successful implementation of the program.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="political-engagement">
+                <h2>Political Leadership & Community Engagement</h2>
+                <div class="photo-grid">
+                    <div class="photo-card">
+                        <img src="IMG_7373.JPG" alt="With Political Leaders">
+                        <div class="photo-info">
+                            <h3>Policy Discussions</h3>
+                            <p>Location: Pokhara</p>
+                            <p>Meeting with leaders of the Maoist Center in Pokhara to discuss regional politics and student life improvements at the university.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="IMG_1413.JPG" alt="Political Leaders Meeting">
+                        <div class="photo-info">
+                            <h3>Strategic Planning</h3>
+                            <p>Location: Pokhara</p>
+                            <p>Engaging with key political figures to address crucial issues affecting students and the Pokhara community.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="IMG_1101.JPEG" alt="Blood Donation Program">
+                        <div class="photo-info">
+                            <h3>Community Service</h3>
+                            <p>Location: Pokhara</p>
+                            <p>Participating in a blood donation program organized by YCL Nepal Kaski, demonstrating commitment to community welfare.</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <img src="CXPM4768.JPG" alt="With Student Leaders">
+                        <div class="photo-info">
+                            <h3>Student Leadership Network</h3>
+                            <p>Location: Pokhara</p>
+                            <p>Collaborating with fellow student leaders from ANNISU(R) to address educational challenges and develop action plans.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
         
-        <section>
-            <h2>Contact Information</h2>
-            <p>Email: <a href="mailto:drishyavhai1@gmail.com">drishyavhai1@gmail.com </a></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/drishya-adhikari-5a172b165/">linkedin.com/in/drishya-adhikari-5a172b165</a></p>
-            <p>Facebook: <a href="https://www.facebook.com/drishya.adhikar">facebook.com/drishya.adhikar</a></p>
-            <p>Instagram: <a href=https://www.instagram.com/drishya_adhikari_/">instagram.com/drishya_adhikari_/</a></p>
-        </section>
+        <!-- Contact Page Content -->
+        <div id="contact-content" style="display: none;">
+            <header>
+                <h1>Contact Me</h1>
+                <p class="tagline">Let's connect for collaboration, discussion, or just to say hello</p>
+            </header>
+            
+            <nav>
+                <a href="#home-content" onclick="showPage('home-content'); return false;">Home</a>
+                <a href="#photos-content" onclick="showPage('photos-content'); return false;">Portfolio</a>
+                <a href="#contact-content" class="active" onclick="showPage('contact-content'); return false;">Contact</a>
+            </nav>
+            
+            <section>
+                <h2>Get In Touch</h2>
+                <div class="contact-info">
+                    <div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <p><a href="mailto:drishyavhai1@gmail.com">drishyavhai1@gmail.com</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <p><a href="https://www.linkedin.com/in/drishya-adhikari-5a172b165/" target="_blank">linkedin.com/in/drishya-adhikari</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-facebook"></i>
+                            <p><a href="https://www.facebook.com/drishya.adhikar" target="_blank">facebook.com/drishya.adhikar</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-instagram"></i>
+                            <p><a href="https://www.instagram.com/drishya_adhikari_/" target="_blank">instagram.com/drishya_adhikari_</a></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Areas of Interest</h3>
+                        <p>• Student Leadership & Advocacy</p>
+                        <p>• Political Activism & Community Engagement</p>
+                        <p>• Information Technology & Digital Solutions</p>
+                        <p>• Mountain Trekking & Adventure Photography</p>
+                    </div>
+                </div>
+            </section>
+        </div>
         
-        
+        <footer>
+            <p class="footer-text">© 2025 Drishya Adhikari. All rights reserved.</p>
+            <div class="social-links">
+                <a href="mailto:drishyavhai1@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/drishya-adhikari-5a172b165/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/drishya.adhikar" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/drishya_adhikari_/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </footer>
     </div>
-    
-    
     
     <script>
         function showPage(pageId) {
@@ -366,6 +502,9 @@
                     link.classList.add('active');
                 }
             });
+            
+            // Scroll to top when changing pages
+            window.scrollTo(0, 0);
         }
     </script>
 </body>
